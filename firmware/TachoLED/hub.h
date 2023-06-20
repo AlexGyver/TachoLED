@@ -22,27 +22,27 @@ void build() {
     hub.Title(F("Status"));
     hub.BeginWidgets();
     hub.WidgetSize(50);
-    hub.Gauge(F("spd"), tacho_kmh(), F("kmh"), F("Speed"), 0, data.max_spd);
-    hub.Gauge(F("vbat"), getBat(), F("%"), F("Battery"));
+    hub.Gauge_(F("spd"), tacho_kmh(), F("kmh"), F("Speed"), 0, data.max_spd);
+    hub.Gauge(getBat(), F("%"), F("Battery"));
 
     hub.Title(F("Mode"));
     hub.WidgetSize(100);
-    flag |= hub.Tabs(F("mode"), &data.mode, F("Pallette,Color"), F("Mode"));
+    flag |= hub.Tabs(&data.mode, F("Pallette,Color"), F("Mode"));
     
     if (data.mode == 0) {
         hub.WidgetSize(50);
-        flag |= hub.Input(F("pal_len"), &data.pal_len, GH_UINT16, F("Length [leds]"));
-        flag |= hub.Select(F("pal"), &data.pal, FPSTR(paletteNames));
+        flag |= hub.Input(&data.pal_len, GH_UINT16, F("Length [leds]"));
+        flag |= hub.Select(&data.pal, FPSTR(paletteNames));
     }
 
     hub.Title(F("Settings"));
     hub.WidgetSize(50);
-    flag |= hub.Input(F("leds"), &data.led_amount, GH_UINT16, F("LED amount"));
-    flag |= hub.Input(F("diam"), &data.diam, GH_UINT16, F("Diameter [mm]"));
-    flag |= hub.Input(F("ledm"), &data.ledm, GH_UINT8, F("leds/m"));
-    flag |= hub.Input(F("max_spd"), &data.max_spd, GH_UINT8, F("Max speed [kmh]"));
+    flag |= hub.Input(&data.led_amount, GH_UINT16, F("LED amount"));
+    flag |= hub.Input(&data.diam, GH_UINT16, F("Diameter [mm]"));
+    flag |= hub.Input(&data.ledm, GH_UINT8, F("leds/m"));
+    flag |= hub.Input(&data.max_spd, GH_UINT8, F("Max speed [kmh]"));
     hub.WidgetSize(100);
-    flag |= hub.Slider(F("bri"), &data.led_bri, GH_UINT8, F("Brightness"), 0, 255);
+    flag |= hub.Slider(&data.led_bri, GH_UINT8, F("Brightness"), 0, 255);
 
     if (flag) memory.update();
 }
