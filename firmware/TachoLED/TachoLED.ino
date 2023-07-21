@@ -9,6 +9,7 @@ void setup() {
     WiFi.mode(WIFI_AP);
     WiFi.softAP("TachoLED");
 
+    EEPROM.begin(memory.blockSize());
     memory.begin(0, 'b');
     led_init();
     led_change();
